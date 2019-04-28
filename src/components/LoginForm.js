@@ -64,12 +64,6 @@ renderButton() {
         
         {/* For User ID */}
         <CardSection>
-        {/* When the text input is not treated as a custom component 
-        <TextInput
-        value={this.state.text}
-        onChangeText={text => this.setState({ text: text })}
-        style={{ height: 20, width: 100 }}
-        /> */}
         <Input
         autoCorrect
         placeholder="user@email.com"

@@ -1,15 +1,14 @@
-//App.js in src dir is using the Login Form and Header to set up the main UI for index.js at root for the App
 import React, { Component } from "react";
 import { View } from "react-native";
+
 // import the firebase third party lib
 import firebase from "firebase";
+
 // Custom Components to be used in the app
 //import { Header } from "./components/common/Header";
 import {Header, CustomButton, Card, CardSection, Input ,Spinner  } from "./common";
 
 // Import our LoginForm component to be displayed on the screen
-//import LoginForm from "./components/LoginForm";
-
 import LoginForm from "./LoginForm";
 
 class App extends Component {
@@ -50,6 +49,7 @@ class App extends Component {
                 </Card>
             );
             case false:
+            {/* Open Login Form */}
             return <LoginForm />;
             default:
             return <Spinner size="large" />;
