@@ -4,6 +4,12 @@ import { View } from "react-native";
 // import the firebase third party lib
 import firebase from "firebase";
 
+//Redux specific
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+//Get Reducers
+import reducers from "./reducers";
+
 // Custom Components to be used in the app
 //import { Header } from "./components/common/Header";
 import {Header, CustomButton, Card, CardSection, Input ,Spinner  } from "./common";
@@ -11,60 +17,16 @@ import {Header, CustomButton, Card, CardSection, Input ,Spinner  } from "./commo
 // Import our LoginForm component to be displayed on the screen
 import LoginForm from "./LoginForm";
 
-class App extends Component {
-
-    state = { loggedIn: null };
-    //Life Cycle Method to init the firebase
-    componentWillMount(){
-        firebase.initializeApp({
-            apiKey: "AIzaSyCS4r5KFL-ZfFPUGp8BKreZIdO3HRU7zJg",
-            authDomain: "rnapp-auth-class.firebaseapp.com",
-            databaseURL: "https://rnapp-auth-class.firebaseio.com",
-            projectId: "rnapp-auth-class",
-            storageBucket: "rnapp-auth-class.appspot.com",
-            messagingSenderId: "738911042070"
-        });
-
-        //Handle the Application when it's logged in or logged out
-        firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-        this.setState({ loggedIn: true });
-        } else {
-        this.setState({ loggedIn: false });
-        }
-        });
-    }
-
-    renderContent() {
-        switch (this.state.loggedIn) {
-            case true:
-            return (
-                <Card>
-                    <CardSection>
-                        {/* Call Sign Out Method of Firebase */}
-                        <CustomButton onPress={() => firebase.auth().signOut()}>
-                        Logout
-                        </CustomButton>
-                    </CardSection>
-                </Card>
-            );
-            case false:
-            {/* Open Login Form */}
-            return <LoginForm />;
-            default:
-            return <Spinner size="large" />;
-        }
-    }
-
-render() {
+const App = () => {
     return (
-        <View>
-            <Header headerText="Authentication" />
-            {this.renderContent()}
-        </View>
+    // Provider can only have one child component
+    <Provider store={createStore(reducers)}>
+    <View>
+    <Header headerText="Redux Demo -- Tech Stack" />
+    {/* <LibraryList /> */}
+    </View>
+    </Provider>
     );
-}
-
-}
-
-export default App ;
+    };
+    
+    export default App;
